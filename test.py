@@ -11,7 +11,7 @@ driver.get('https://section.blog.naver.com/Search/Post.nhn?pageNo=1&rangeType=AL
 driver.implicitly_wait(3)
 
 url_list = []
-urls = driver.find_elements_by_css_selector('.info_post > a')
+urls = driver.find_elements_by_xpath('//*[contains(@class,"desc_inner")]')
 
 for url in urls:
     url_list.append(url.get_attribute('href'))
@@ -19,3 +19,25 @@ for url in urls:
 url_list = list(set(url_list))
 print(url_list)
 print(len(url_list))
+
+driver.get(url_list[0])
+driver.implicitly_wait(3)
+
+real_url = driver.find_element_by_xpath('//frame').get_attribute('src')
+print(real_url)
+driver.get(real_url)
+driver.implicitly_wait(3)
+
+text_list = []
+
+texts = driver.find_elements_by_xpath('//*[contains(@class,"se_textarea")]')
+
+
+if len(texts) < 1:
+    print('why cannot select')
+
+for text in texts:
+    raw_text = text.text
+    text_list.append(raw_text)
+
+print(text_list)
