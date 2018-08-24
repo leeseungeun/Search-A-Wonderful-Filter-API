@@ -1,5 +1,6 @@
 from selenium import webdriver
-
+from konlpy.tag import Mecab
+from konlpy.utils import pprint
 
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
@@ -40,4 +41,9 @@ for text in texts:
     raw_text = text.text
     text_list.append(raw_text)
 
-print(text_list)
+# print(text_list)
+
+dom_string = ''.join(text_list)
+
+mecab = Mecab()
+pprint(mecab.pos(dom_string))
