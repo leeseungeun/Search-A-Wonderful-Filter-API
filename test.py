@@ -18,14 +18,14 @@ for url in urls:
     url_list.append(url.get_attribute('href'))
 
 url_list = list(set(url_list))
-print(url_list)
-print(len(url_list))
+#print(url_list)
+#print(len(url_list))
 
 driver.get(url_list[0])
 driver.implicitly_wait(3)
 
 real_url = driver.find_element_by_xpath('//frame').get_attribute('src')
-print(real_url)
+#print(real_url)
 driver.get(real_url)
 driver.implicitly_wait(3)
 
